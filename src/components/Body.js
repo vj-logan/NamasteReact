@@ -4,21 +4,23 @@ import { SWIGGY_API_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
-    const [resList, setResList] = useState(null);
-    const [searchInput, setsearchInput] = useState("")
+    const [listOfRestaurants, setListOfRestaurants] = useState(null);
+    const [fileredRestaurants, setFilteredRestaurants] = useState(null);
+    const [searchInput, setSearchInput] = useState("")
     const getData = async() => {
         const response = await fetch(SWIGGY_API_URL)
         const result = await response.json();
         const resultData = result?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         console.log(resultData);
-        setResList(resultData)
+        setListOfRestaurants(resultData);
+        setFilteredRestaurants(resultData);
     }
 // whenever state is updated, react triggers a reconcilation cycle, so it triggers a rerender of the whole component
     console.log("rendered");
     useEffect(()=> {
         getData();
     },[])
-    if(!resList) {
+    if(!listOfRestaurants) {
         return <Shimmer/>;
     }
     
@@ -27,21 +29,25 @@ const Body = () => {
             <div className="filter">
                 <div className="search">
                     <input type="text"className="search-box" value={searchInput} onChange={(e)=> {
-                        setsearchInput(e.target.value)}}/>
+                        setSearchInput(e.target.value)
+                        setListOfRestaurants(listOfRestaurants)
+                        }}/>
                     <button className="search-btn" onClick={()=> {
-                        console.log(searchInput);
+                        const filteredData = listOfRestaurants.filter((res) => res.info.name.toLowerCase().includes(searchInput.toLowerCase()));
+                        setFilteredRestaurants(filteredData);
+                        console.log("search result:" + filteredData);
                     }}>search</button>
                 </div>
                 <button className="button" onClick={()=>{
-                    const filteredData = resList.filter((restaurant)=> restaurant.info.avgRating > 4)
+                    const filteredData = listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating > 4)
                     console.log("filetered Data: " + filteredData)
-                    setResList(filteredData);
+                    setFilteredRestaurants(filteredData);
                 }}>
                     Top Restaurants
                 </button>
             </div>
         <div className="res-container">
-            {resList?.map(restaurant =>(<RestaurantCard key={restaurant.info.id} restaurant={restaurant}/>))}
+            {fileredRestaurants?.map(restaurant =>(<RestaurantCard key={restaurant.info.id} restaurant={restaurant}/>))}
         </div>
     </div>
     )
