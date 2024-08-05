@@ -1,7 +1,9 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect} from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import { SWIGGY_API_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState(null);
@@ -20,6 +22,11 @@ const Body = () => {
     useEffect(()=> {
         getData();
     },[])
+
+    const onlineStatus = useOnlineStatus();
+    if(onlineStatus=== false) {
+        return <h1>You are offline</h1>
+    }
     if(!listOfRestaurants) {
         return <Shimmer/>;
     }
@@ -47,7 +54,8 @@ const Body = () => {
                 </button>
             </div>
         <div className="res-container">
-            {fileredRestaurants?.map(restaurant =>(<RestaurantCard key={restaurant.info.id} restaurant={restaurant}/>))}
+            {fileredRestaurants?.map(restaurant =>(
+                <Link key={restaurant.info.id} to={"restaurants/" + restaurant.info.id}><RestaurantCard key={restaurant.info.id} restaurant={restaurant}/></Link>))}
         </div>
     </div>
     )
