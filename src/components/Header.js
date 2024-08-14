@@ -1,26 +1,36 @@
 import { LOGO_URL } from "../utils/constants";
-import {useState, useEffect} from  "react";
+import {useState, useEffect, useContext} from  "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const [isLogin, setIsLogin] = useState(false);
     useEffect(()=>{
-        console.log("component rendered, useEffect called");
+        //console.log("component rendered, useEffect called");
     }, [])
     const onlineStatus = useOnlineStatus();
-    return (<div className="header">
-        <div className="logo">
+    const {loggedInUser, setUserName} = useContext(UserContext)
+   // setUserName("kishore");
+
+   //subscribing to the store using selector
+   const cartItems = useSelector((store) => store.cartSlice.items )
+   console.log(cartItems)
+    return (
+    <div className="bg-slate-600 text-gray-300 flex justify-between items-center">
+        <div className="w-[150px] p-4 ">
             <img src={LOGO_URL} alt="logo" />
         </div>
         <div className="nav-items">
-            <ul>
-                <li>Online: {onlineStatus? "✅" : "❌"}</li>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About Us</Link></li>
-                <li><Link to="/contact">Contact Us</Link></li>
-                <li>Cart</li>
-                <li><button className="log-btn" onClick = {()=>{setIsLogin(!isLogin)}} >{isLogin? "Logout" : "Login"}</button></li>
+            <ul className="flex">
+                <li className="mx-2" >Online: {onlineStatus? "✅" : "❌"}</li>
+                <li className="mx-2"><Link to="/">Home</Link></li>
+                <li className="mx-2"><Link to="/about">About Us</Link></li>
+                <li className="mx-2"><Link to="/contact">Contact Us</Link></li>
+                <li className="mx-2">Cart [{cartItems.length}]</li>
+                <li className="mx-2"><button className="log-btn" onClick = {()=>{setIsLogin(!isLogin)}} >{isLogin? "Logout" : "Login"}</button></li>
+                <li className="mx-2">{loggedInUser}</li>
             </ul>
         </div>
     </div>

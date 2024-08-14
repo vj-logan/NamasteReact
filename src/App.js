@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from "react"
+import React, {lazy, Suspense, useEffect, useState} from "react"
 import ReactDOM from "react-dom/client"
 import Header from "./components/Header"
 import Body from "./components/Body"
@@ -7,6 +7,9 @@ import Error from "./components/Error"
 import { Outlet } from "react-router-dom"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import RestaurantMenu from "./components/RestaurantMenu"
+import UserContext from "./utils/UserContext"
+import appStore from "./components/appStore"
+import { Provider } from "react-redux"
 
 //Chunking
 // Lazy Loading
@@ -15,12 +18,25 @@ import RestaurantMenu from "./components/RestaurantMenu"
 // Dynamic Bundling
 // Dynamic import
 const ContactUs = lazy(()=> import("./components/ContactUs"));
-const AppLayout  = () => (
-    <>
-        <Header/>
-        <Outlet/>
-    </>
+const AppLayout  = () => {
+
+    const [userName, setUserName] = useState(null)
+    useEffect(()=>{
+        const data = {name: "Vineetha"}
+        setUserName(data.name)
+    }, [])
+    return(
+        <Provider store={appStore}>
+        <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+        <>
+            <Header/>
+            <Outlet/>
+        </>
+        </UserContext.Provider>
+        </Provider>
 )
+}
+
 
 const appRouter = createBrowserRouter([
     {

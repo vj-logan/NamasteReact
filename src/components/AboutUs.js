@@ -6,13 +6,13 @@ import User2Class from './User2Class'
 class AboutUs extends Component {
   constructor() {
     super();
-    console.log("Parent Constructor")
+    //console.log("Parent Constructor")
   }
   componentDidMount() {
-    console.log("Parent Mounted")
+    //console.log("Parent Mounted")
   }
   render() {
-    console.log("Parent rendered")
+    //console.log("Parent rendered")
     return (
       <div>
         <h1>About Us</h1>

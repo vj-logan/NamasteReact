@@ -28,3 +28,8 @@
 //  - RestaurantContainer
 //      - Res Cards
 // Footer
+
+# Redux
+- install @reduxjs/toolkit  and react-redux
+- Build our store
+- connect our store to the App
