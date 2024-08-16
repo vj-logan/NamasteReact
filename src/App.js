@@ -10,6 +10,7 @@ import RestaurantMenu from "./components/RestaurantMenu"
 import UserContext from "./utils/UserContext"
 import appStore from "./components/appStore"
 import { Provider } from "react-redux"
+import Cart from "./components/Cart"
 
 //Chunking
 // Lazy Loading
@@ -58,6 +59,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurants/:resId",
                 element: <RestaurantMenu/>
+            },
+            {
+                path: "/cart",
+                element: <Cart/>
             }
         ],
         errorElement: <Error/>

@@ -28,7 +28,7 @@ const Header = () => {
                 <li className="mx-2"><Link to="/">Home</Link></li>
                 <li className="mx-2"><Link to="/about">About Us</Link></li>
                 <li className="mx-2"><Link to="/contact">Contact Us</Link></li>
-                <li className="mx-2">Cart [{cartItems.length}]</li>
+                <li className="mx-2"><Link to="/cart">Cart-[{cartItems.length}]</Link></li>
                 <li className="mx-2"><button className="log-btn" onClick = {()=>{setIsLogin(!isLogin)}} >{isLogin? "Logout" : "Login"}</button></li>
                 <li className="mx-2">{loggedInUser}</li>
             </ul>

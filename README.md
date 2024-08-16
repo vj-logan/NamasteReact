@@ -33,3 +33,11 @@
 - install @reduxjs/toolkit  and react-redux
 - Build our store
 - connect our store to the App
+- slice (cartSlice)
+- dispatch (action)
+- selector
+
+# Types of Testing (developer)
+- Unit Testing 
+- Integration Testing
+- End to End Testing - e2e testing
