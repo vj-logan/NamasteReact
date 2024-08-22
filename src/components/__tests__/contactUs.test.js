@@ -3,6 +3,22 @@ import "@testing-library/jest-dom"
 import ContactUs from "../ContactUs";
 
 describe("ContactUs page test cases", () => {
+
+    // beforeAll(()=>{
+    //     console.log("Before All");
+    // })
+    // beforeEach(()=>{
+    //     console.log("Before Each");
+    // })
+
+    // afterAll(()=>{
+    //     console.log("After All");
+    // })
+
+    // afterEach(()=>{
+    //     console.log("After Each");
+    // })
+
     it("Should render", ()=> {
         render(<ContactUs/>)
         const heading = screen.getByRole("heading");
