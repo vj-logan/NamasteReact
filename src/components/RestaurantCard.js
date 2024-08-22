@@ -2,11 +2,12 @@ import { IMG_URL } from "../utils/constants";
 import {useContext} from "react"
 import UserContext from "../utils/UserContext";
 
-const RestaurantCard = (props) => {
-    const {info} = props.restaurantData;
+const RestaurantCard = ({restaurantData}) => {
+    const {info} = restaurantData;
+    //console.log(props.restaurantData);
     const {loggedInUser} = useContext(UserContext);
     return (
-        <div className="m-4 p-4 w-[320px] rounded-lg bg-slate-300 hover:bg-slate-400">
+        <div data-testid="resCard" className="m-4 p-4 w-[320px] rounded-lg bg-slate-300 hover:bg-slate-400">
             <img className="w-[300px] h-[200px] rounded-lg" src={IMG_URL + info.cloudinaryImageId} />
             <h2 className="font-bold my-2">{info.name}</h2>
             <h3>{info.cuisines.join(' ')}</h3>

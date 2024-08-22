@@ -11,7 +11,7 @@ const ItemList = ({itemCards}) => {
     return (
             itemCards.map((itemCard)=> {
         return (
-            <div className="border-b-2 flex" key={itemCard.card.info.id}>
+            <div data-testid="foodItem" className="border-b-2 flex" key={itemCard.card.info.id}>
                 <div className="w-8/12">
                     <p>{itemCard.card.info.name}</p>
                     <p>{itemCard.card.info.description}</p>

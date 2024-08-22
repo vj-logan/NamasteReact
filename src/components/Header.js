@@ -16,7 +16,7 @@ const Header = () => {
 
    //subscribing to the store using selector
    const cartItems = useSelector((store) => store.cartSlice.items )
-   console.log(cartItems)
+   //console.log(cartItems)
     return (
     <div className="bg-slate-600 text-gray-300 flex justify-between items-center">
         <div className="w-[150px] p-4 ">

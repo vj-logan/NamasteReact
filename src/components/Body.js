@@ -38,7 +38,7 @@ const Body = () => {
         <div className="body">
             <div className="filter flex m-4 p-4">
                 <div className="flex">
-                    <input type="text" className="border border-gray-800" value={searchInput} onChange={(e)=> {
+                    <input type="text" data-testid="searchInput" className="border border-gray-800" value={searchInput} onChange={(e)=> {
                         setSearchInput(e.target.value)
                         setListOfRestaurants(listOfRestaurants)
                         }}/>
@@ -50,7 +50,7 @@ const Body = () => {
                 </div>
                 <div>
                     <button className="mx-4 px-4 py-2 bg-green-100 hover:bg-green-200" onClick={()=>{
-                        const filteredData = listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating > 4)
+                        const filteredData = listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating > 4.5)
                         //console.log("filetered Data: " + filteredData)
                         setFilteredRestaurants(filteredData);
                     }}>
@@ -60,10 +60,11 @@ const Body = () => {
                 </div>
             </div>
         <div className="res-container flex flex-wrap">
-            {fileredRestaurants?.map(restaurant =>(
-                <Link key={restaurant.info.id} to={"restaurants/" + restaurant.info.id}>
+            {fileredRestaurants?.map(restaurant =>{
+                //console.log(restaurant);
+                return(<Link key={restaurant.info.id} to={"restaurants/" + restaurant.info.id}>
                    {restaurant?.info?.isNewlyOnboarded? <RestaurantCardPromoted key={restaurant.info.id} restaurantData={restaurant}/> : <RestaurantCard key={restaurant.info.id} restaurantData={restaurant}/>}
-                </Link>))}
+                </Link>)})}
         </div>
     </div>
     )

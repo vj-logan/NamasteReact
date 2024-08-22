@@ -1,5 +1,3 @@
-import RestaurantCard from "./RestaurantCard"
-
 const withLabel = (InputComponent) => {
     return (props)=> {
         //console.log(props);
